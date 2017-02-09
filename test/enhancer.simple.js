@@ -1,5 +1,5 @@
 import enhancer from '../lib/enhancer';
-import memory from '../lib/apis/memory';
+import nil from '../lib/apis/nil';
 import { expect } from 'chai';
 
 describe('enhancer', () => {
@@ -10,7 +10,7 @@ describe('enhancer', () => {
     before(() => {
       state = {};
       history = enhancer({
-        api: memory,
+        api: nil,
       })(() => {});
     });
 
