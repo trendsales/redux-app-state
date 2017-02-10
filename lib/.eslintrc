@@ -5,5 +5,8 @@
     "no-param-reassign": 0,
     "no-plusplus": 0,
     "no-else-return": 0
+  },
+  "env": {
+    "browser": true
   }
 }
