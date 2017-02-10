@@ -1,15 +1,15 @@
+import { expect } from 'chai';
 import enhancer from '../lib/enhancer';
 import memory from '../lib/apis/memory';
-import { expect } from 'chai';
 
 describe('enhancer', () => {
   describe('init state', () => {
     it('should apply init state', () => {
       let state = {};
-      let history = enhancer({
+      const history = enhancer({
         api: memory(),
-        initState: { hello: 'world' }
-      })(state => state);
+        initState: { hello: 'world' },
+      })(s => s);
 
       state = history(state, {
         type: '@@history/BEFORE_NAVIGATE',
@@ -21,15 +21,14 @@ describe('enhancer', () => {
         url: 'test1',
       });
 
-      expect(state.history).to.exist;
       expect(state.hello).to.be.eql('world');
     });
 
     it('should apply preloaded state', () => {
       let state = {};
-      let history = enhancer({
+      const history = enhancer({
         api: memory(),
-      })(state => state);
+      })(s => s);
 
       state = history(state, {
         type: '@@history/BEFORE_NAVIGATE',
@@ -42,7 +41,6 @@ describe('enhancer', () => {
         url: 'test1',
       });
 
-      expect(state.history).to.exist;
       expect(state.hello).to.be.eql('universe');
     });
   });

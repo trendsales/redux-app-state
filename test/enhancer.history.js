@@ -1,6 +1,6 @@
+import { expect } from 'chai';
 import enhancer from '../lib/enhancer';
 import memory from '../lib/apis/memory';
-import { expect } from 'chai';
 
 describe('enhancer', () => {
   describe('history state', () => {
@@ -10,11 +10,11 @@ describe('enhancer', () => {
       browserState = memory();
     });
 
-    it ('should update history state', () => {
-      let state = {};
-      let history = enhancer({
+    it('should update history state', () => {
+      let state = {}; // eslint-disable-line
+      const history = enhancer({
         api: browserState,
-      })(state => state);
+      })(s => s);
 
       state = history(state, {
         type: '@@history/BEFORE_NAVIGATE',
@@ -37,16 +37,16 @@ describe('enhancer', () => {
         url: 'test2',
       });
 
-      let browser = browserState.getState();
+      const browser = browserState.getState();
       expect(browser).to.have.length(2);
       expect(browser[1].state.hello).to.be.equal('universe');
     });
 
-    it ('should re-apply history state', () => {
+    it('should re-apply history state', () => {
       let state = {};
-      let history = enhancer({
+      const history = enhancer({
         api: browserState,
-      })(state => state);
+      })(s => s);
       state = history(state, { type: 'nil' });
 
       expect(state.history.pages).to.have.length(1);

@@ -1,6 +1,6 @@
+import { expect } from 'chai';
 import enhancer from '../lib/enhancer';
 import nil from '../lib/apis/nil';
-import { expect } from 'chai';
 
 describe('enhancer', () => {
   describe('clean', () => {
@@ -18,7 +18,7 @@ describe('enhancer', () => {
         url,
         meta,
       });
-    }
+    };
 
     beforeEach(() => {
       state = {};
@@ -41,7 +41,7 @@ describe('enhancer', () => {
 
       state = history(state, {
         type: '@@history/CLEAN',
-        query: { hello: 1 }
+        query: { hello: 1 },
       });
 
       expect(state.history.pages.map(p => p.meta.hello)).to.be.eql([undefined, 2]);
@@ -55,7 +55,7 @@ describe('enhancer', () => {
 
       state = history(state, {
         type: '@@history/CLEAN',
-        query: { hello: [ 2, 3 ] }
+        query: { hello: [2, 3] },
       });
 
       expect(state.history.pages.map(p => p.url)).to.be.eql(['2']);

@@ -39,7 +39,7 @@
   },
   "scripts": {
     "test:mocha": "mocha --compilers js:babel-register",
-    "test:lint": "eslint lib",
+    "test:lint": "eslint lib test",
     "test:coverage": "nyc npm run test:mocha",
     "test": "npm run test:coverage && npm run test:lint",
     "build": "babel lib -d build",

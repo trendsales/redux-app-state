@@ -1,7 +1,7 @@
+import { expect } from 'chai';
 import enhancer from '../lib/enhancer';
 import nil from '../lib/apis/nil';
 import withDismissed from '../lib/strategies/with-dismissed';
-import { expect } from 'chai';
 
 describe('enhancer', () => {
   describe('strategies', () => {
@@ -18,7 +18,7 @@ describe('enhancer', () => {
           type: '@@history/NAVIGATE',
           url,
         });
-      }
+      };
 
       before(() => {
         state = {};
@@ -35,22 +35,22 @@ describe('enhancer', () => {
           type: '@@history/TRAVEL',
         });
         expect(state.history.pages).to.have.length(3);
-        expect(state.history.pages.map(p => !!p.meta.dismissed)).to.be.eql([ false, false, true ]);
-        expect(state.history.pages.map(p => p.url)).to.be.eql([ '1', '2', '3' ]);
+        expect(state.history.pages.map(p => !!p.meta.dismissed)).to.be.eql([false, false, true]);
+        expect(state.history.pages.map(p => p.url)).to.be.eql(['1', '2', '3']);
 
         state = history(state, {
           type: '@@history/TRAVEL',
         });
         expect(state.history.pages).to.have.length(3);
-        expect(state.history.pages.map(p => !!p.meta.dismissed)).to.be.eql([ false, true, true ]);
-        expect(state.history.pages.map(p => p.url)).to.be.eql([ '1', '2', '3' ]);
+        expect(state.history.pages.map(p => !!p.meta.dismissed)).to.be.eql([false, true, true]);
+        expect(state.history.pages.map(p => p.url)).to.be.eql(['1', '2', '3']);
       });
 
       it('should remove the dismissed pages after a new navigation', () => {
         navigate('4');
         expect(state.history.pages).to.have.length(2);
-        expect(state.history.pages.map(p => !!p.meta.dismissed)).to.be.eql([ false, false ]);
-        expect(state.history.pages.map(p => p.url)).to.be.eql([ '1', '4' ]);
+        expect(state.history.pages.map(p => !!p.meta.dismissed)).to.be.eql([false, false]);
+        expect(state.history.pages.map(p => p.url)).to.be.eql(['1', '4']);
       });
     });
   });
