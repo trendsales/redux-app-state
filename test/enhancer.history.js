@@ -29,7 +29,7 @@ describe('enhancer', () => {
 
       state = history(state, {
         type: '@@history/BEFORE_NAVIGATE',
-        url: 'tes21',
+        url: 'test1',
       });
 
       state = history(state, {

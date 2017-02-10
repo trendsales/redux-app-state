@@ -3,3 +3,5 @@
 coverage
 npm-debug.log
 /build
+/.env
+/sauce_connect.log
