@@ -26,10 +26,16 @@
     "immutable": "^3.8.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "nyc": "^10.1.2"
+    "nyc": "^10.1.2",
+    "sinon": "^1.17.7"
   },
   "dependencies": {
     "immutable": "^3.8.1"
+  },
+  "nyc": {
+    "include": [
+      "lib/*.js"
+    ]
   },
   "scripts": {
     "test:mocha": "mocha --compilers js:babel-register",
