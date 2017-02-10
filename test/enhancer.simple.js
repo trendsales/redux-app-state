@@ -1,17 +1,24 @@
 import enhancer from '../lib/enhancer';
 import nil from '../lib/apis/nil';
 import { expect } from 'chai';
+import { spy } from 'sinon';
 
 describe('enhancer', () => {
   describe('simple', () => {
     let state = null;
     let history = null;
+    let afterNavigate = null;
 
     before(() => {
       state = {};
       history = enhancer({
         api: nil,
+        afterNavigate: () => { afterNavigate(); }
       })(() => {});
+    });
+
+    beforeEach(() => {
+      afterNavigate = spy();
     });
 
     it('should not be initialized with any commits', () => {
@@ -84,6 +91,19 @@ describe('enhancer', () => {
         type: '@@history/TRAVEL'
       });
       expect(state.history.pages).to.have.length(0);
+    });
+
+    it('should call after navigate', () => {
+      state = history(state, {
+        type: '@@history/BEFORE_NAVIGATE',
+        url: 'test2',
+      });
+      state = history(state, {
+        type: '@@history/NAVIGATE',
+        url: 'test2',
+      });
+
+      expect(afterNavigate.callCount).to.be.equal(1);
     });
   });
 });
