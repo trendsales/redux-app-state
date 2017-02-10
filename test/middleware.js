@@ -1,5 +1,56 @@
 import middleware from '../lib/middleware';
+import { expect } from 'chai';
+import { spy } from 'sinon';
+import nil from '../lib/apis/nil';
 
 describe('middleware', () => {
-  it('should find default page on back beyond start, if ')
+  let dispatch = null;
+  let instance = null;
+  let pop = null;
+
+  beforeEach(() => {
+    dispatch = spy();
+    instance = middleware({
+      api: Object.assign({}, nil, {
+        getState: () => true,
+        listenForPop: (cb) => {
+          pop = cb;
+        },
+      }),
+      resolveMeta: ({ meta }) => {
+        dispatch(meta);
+        return meta;
+      },
+    })({
+      dispatch,
+    });
+  });
+
+  it('should dispatch a BEGIN_NAVIGATE, followed by a NAVIGATE', () => {
+    return instance(a => a)({
+      type: '@@history/NAVIGATE',
+      url: 'test1',
+      meta: 'test2',
+    }).then(() => {
+      expect(dispatch.callCount).to.be.equal(3);
+      expect(dispatch.firstCall.args[0].type).to.be.equal('@@history/BEFORE_NAVIGATE');
+      expect(dispatch.secondCall.args[0]).to.be.equal('test2');
+      expect(dispatch.thirdCall.args[0].type).to.be.equal('@@history/NAVIGATE');
+    });
+  });
+
+  it('should just pass through other dispatches', () => {
+    let next = spy();
+    instance(next)({
+      type: '@@hello/world',
+    });
+    expect(next.callCount).to.be.equal(1);
+    expect(next.firstCall.args[0].type).to.be.equal('@@hello/world');
+  });
+
+  it('should dispatch a travel when history pop', () => {
+    pop();
+    expect(dispatch.callCount).to.be.equal(1);
+    expect(dispatch.firstCall.args[0].type).to.be.equal('@@history/TRAVEL');
+  });
 });
