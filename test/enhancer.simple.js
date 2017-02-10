@@ -1,7 +1,7 @@
-import enhancer from '../lib/enhancer';
-import nil from '../lib/apis/nil';
 import { expect } from 'chai';
 import { spy } from 'sinon';
+import enhancer from '../lib/enhancer';
+import nil from '../lib/apis/nil';
 
 describe('enhancer', () => {
   describe('simple', () => {
@@ -13,7 +13,7 @@ describe('enhancer', () => {
       state = {};
       history = enhancer({
         api: nil,
-        afterNavigate: () => { afterNavigate(); }
+        afterNavigate: () => { afterNavigate(); },
       })(() => {});
     });
 
@@ -31,8 +31,6 @@ describe('enhancer', () => {
         url: 'test1',
       });
       expect(history.getCommits().size).to.be.equal(1);
-      expect(state.history).to.exist;
-      expect(state.history.pages).to.exist;
       expect(state.history.pages).to.have.length(0);
     });
 
@@ -42,8 +40,6 @@ describe('enhancer', () => {
         url: 'test1',
       });
       expect(history.getCommits().size).to.be.equal(1);
-      expect(state.history).to.exist;
-      expect(state.history.pages).to.exist;
       expect(state.history.pages).to.have.length(1);
       expect(state.history.pages[0]).to.be.eql({
         id: 0,
@@ -76,7 +72,7 @@ describe('enhancer', () => {
 
     it('should remove to top page on back', () => {
       state = history(state, {
-        type: '@@history/TRAVEL'
+        type: '@@history/TRAVEL',
       });
       expect(state.history.pages).to.have.length(1);
       expect(state.history.pages[0]).to.be.eql({
@@ -88,7 +84,7 @@ describe('enhancer', () => {
 
     it('should not return ', () => {
       state = history(state, {
-        type: '@@history/TRAVEL'
+        type: '@@history/TRAVEL',
       });
       expect(state.history.pages).to.have.length(0);
     });

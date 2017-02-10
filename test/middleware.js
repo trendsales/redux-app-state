@@ -1,6 +1,6 @@
-import middleware from '../lib/middleware';
 import { expect } from 'chai';
 import { spy } from 'sinon';
+import middleware from '../lib/middleware';
 import nil from '../lib/apis/nil';
 
 describe('middleware', () => {
@@ -26,21 +26,19 @@ describe('middleware', () => {
     });
   });
 
-  it('should dispatch a BEGIN_NAVIGATE, followed by a NAVIGATE', () => {
-    return instance(a => a)({
-      type: '@@history/NAVIGATE',
-      url: 'test1',
-      meta: 'test2',
-    }).then(() => {
-      expect(dispatch.callCount).to.be.equal(3);
-      expect(dispatch.firstCall.args[0].type).to.be.equal('@@history/BEFORE_NAVIGATE');
-      expect(dispatch.secondCall.args[0]).to.be.equal('test2');
-      expect(dispatch.thirdCall.args[0].type).to.be.equal('@@history/NAVIGATE');
-    });
-  });
+  it('should dispatch a BEGIN_NAVIGATE, followed by a NAVIGATE', () => instance(a => a)({
+    type: '@@history/NAVIGATE',
+    url: 'test1',
+    meta: 'test2',
+  }).then(() => {
+    expect(dispatch.callCount).to.be.equal(3);
+    expect(dispatch.firstCall.args[0].type).to.be.equal('@@history/BEFORE_NAVIGATE');
+    expect(dispatch.secondCall.args[0]).to.be.equal('test2');
+    expect(dispatch.thirdCall.args[0].type).to.be.equal('@@history/NAVIGATE');
+  }));
 
   it('should just pass through other dispatches', () => {
-    let next = spy();
+    const next = spy();
     instance(next)({
       type: '@@hello/world',
     });
