@@ -38,11 +38,11 @@ store = createStore(
 store.dispatch(navigate('/'));
 ```
 
-### Handling navigation
+## Handling navigation
 
-#### resolveMeta
+### resolveMeta
 
-### APIs
+## APIs
 In addition to strategies, different APIs can also be passed, to indicate how the application can update its environment, for instance if it should use `window.history`, hashes in the url or simple not reflect changes to the outside.
 
 **nil** Does not effect its outside environment history tracking and page changing is done only in memory
@@ -51,16 +51,16 @@ In addition to strategies, different APIs can also be passed, to indicate how th
 
 **hash** (Not yet finished)
 
-### Build in strategies
+## Build in strategies
 There are a few ready to go strategies, which defines how the history behaves.
 
 **Default** If no strategy is provided it will pop the top page on back and nothing else.
 
 **With dismissed** When navigating back, pages are not removed from the page list, but instead marked as dismissed in its meta data. When a new page is added all dismissed pages are removed.
 
-### Custom strategies
+## Custom strategies
 
-#### Options
+### Options
 
 **api** The API for handling out side integration.
 
