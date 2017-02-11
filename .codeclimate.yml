@@ -1,2 +1,21 @@
+engines:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby:
+        - mass_threshold: 30
+      - javascript
+ratings:
+  paths:
+  - lib/**
+JavaScript: true
+Ruby: false
+Python: false
+PHP: false
 exclude_paths:
 - build/**/*
