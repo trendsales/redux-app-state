@@ -5,3 +5,4 @@ npm-debug.log
 /build
 /.env
 /sauce_connect.log
+/demo/node_modules

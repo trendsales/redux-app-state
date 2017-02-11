@@ -30,7 +30,7 @@ import { createStore, applyMiddleware } from 'redux';
 const historyMiddleware = createHistoryMiddleware();
 const historyReducer = createHistoryReducer(withDismissed);
 
-store = createStore(
+const store = createStore(
   historyReducer(reducers),
   applyMiddleware(historyMiddleware)
 );
