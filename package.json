@@ -1,7 +1,7 @@
 {
   "name": "redux-app-state",
-  "version": "0.9.2",
-  "main": "build/main.js",
+  "version": "0.9.3",
+  "main": "./main.js",
   "repository": "https://github.com/trendsales/redux-app-state",
   "author": "Morten Olsen <morten@olsen.io>",
   "license": "MIT",
