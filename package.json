@@ -1,7 +1,7 @@
 {
   "name": "redux-app-state",
-  "version": "1.0.0",
-  "main": "build/main.js",
+  "version": "0.9.3",
+  "main": "./main.js",
   "repository": "https://github.com/trendsales/redux-app-state",
   "author": "Morten Olsen <morten@olsen.io>",
   "license": "MIT",
@@ -26,7 +26,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "^6.9.0",
-    "immutable": "^3.8.1",
     "istanbul": "^0.4.5",
     "karma": "^1.4.1",
     "karma-babel-preprocessor": "^6.0.1",
@@ -41,9 +40,7 @@
     "sinon": "^1.17.7",
     "watchify": "3"
   },
-  "dependencies": {
-    "immutable": "^3.8.1"
-  },
+  "dependencies": {},
   "nyc": {
     "include": [
       "lib/*.js"
@@ -55,7 +52,7 @@
     "test:coverage": "nyc npm run test:mocha",
     "test:karma": "karma start",
     "test": "npm run test:coverage && npm run test:lint",
-    "build": "babel lib -d build",
+    "build": "babel lib -d build && cp package.json ./build && cp README.md ./build",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   }
 }

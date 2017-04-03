@@ -22,7 +22,7 @@ describe('enhancer', () => {
     });
 
     it('should not be initialized with any commits', () => {
-      expect(history.getCommits().size).to.be.equal(0);
+      expect(history.getCommits()).to.have.length(0);
     });
 
     it('should only add commit internally on begin navigate', () => {
@@ -30,7 +30,7 @@ describe('enhancer', () => {
         type: '@@history/BEFORE_NAVIGATE',
         url: 'test1',
       });
-      expect(history.getCommits().size).to.be.equal(1);
+      expect(history.getCommits()).to.have.length(1);
       expect(state.history.pages).to.have.length(0);
     });
 
@@ -39,7 +39,7 @@ describe('enhancer', () => {
         type: '@@history/NAVIGATE',
         url: 'test1',
       });
-      expect(history.getCommits().size).to.be.equal(1);
+      expect(history.getCommits()).to.have.length(1);
       expect(state.history.pages).to.have.length(1);
       expect(state.history.pages[0]).to.be.eql({
         id: 0,
