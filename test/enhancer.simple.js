@@ -105,7 +105,7 @@ describe('enhancer', () => {
       });
 
       return asyncWait.then((args) => {
-        expect(args).to.have.length(1);
+        expect(args).to.have.length(3);
       });
     });
   });
