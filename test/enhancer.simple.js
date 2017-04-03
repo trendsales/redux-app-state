@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { spy } from 'sinon';
 import enhancer from '../lib/enhancer';
 import nil from '../lib/apis/nil';
 
@@ -7,7 +6,6 @@ describe('enhancer', () => {
   describe('simple', () => {
     let state = null;
     let history = null;
-    let afterNavigate = { a: null };
     let resolve = null;
     let asyncWait = null;
 

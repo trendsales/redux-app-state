@@ -11,12 +11,13 @@ describe('middleware', () => {
   beforeEach(() => {
     dispatch = spy();
     instance = middleware({
-      api: Object.assign({}, nil, {
+      api: {
+        ...nil,
         getState: () => true,
         listenForPop: (cb) => {
           pop = cb;
         },
-      }),
+      },
       resolveMeta: ({ meta }) => {
         dispatch(meta);
         return meta;
