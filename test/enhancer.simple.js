@@ -7,18 +7,25 @@ describe('enhancer', () => {
   describe('simple', () => {
     let state = null;
     let history = null;
-    let afterNavigate = null;
+    let afterNavigate = { a: null };
+    let resolve = null;
+    let asyncWait = null;
 
     before(() => {
       state = {};
       history = enhancer({
         api: nil,
-        afterNavigate: () => { afterNavigate(); },
+        afterNavigate: (...args) => {
+          resolve(args);
+          return args;
+        },
       })(() => {});
     });
 
     beforeEach(() => {
-      afterNavigate = spy();
+      asyncWait = new Promise((presolve) => {
+        resolve = presolve;
+      });
     });
 
     it('should not be initialized with any commits', () => {
@@ -99,7 +106,9 @@ describe('enhancer', () => {
         url: 'test2',
       });
 
-      expect(afterNavigate.callCount).to.be.equal(1);
+      return asyncWait.then((args) => {
+        expect(args).to.have.length(1);
+      });
     });
   });
 });
