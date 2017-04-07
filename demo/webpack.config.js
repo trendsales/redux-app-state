@@ -1,5 +1,6 @@
 const path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -9,19 +10,36 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
+    modules: [
+      path.join(__dirname, 'src'),
+      'node_modules',
+    ],
     alias: {
       'redux-app-state': path.join(__dirname, '../lib/main.js'),
     },
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new DirectoryNamedWebpackPlugin(),
+  ],
   module: {
-    loaders: [{
-      test: /\.js/,
+    rules: [{
+      test: /\.js$/,
       include: [
         path.join(__dirname, 'src'),
         path.join(__dirname, '../lib'),
       ],
       loader: 'babel-loader',
+    }, {
+      test: /\.css$/,
+      use: [
+        'style-loader', {
+          loader: 'css-loader',
+          query: {
+            modules: true,
+          },
+        },
+      ],
     }],
   },
 };

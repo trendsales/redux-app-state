@@ -1,27 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createHistoryReducer, createHistoryMiddleware } from 'redux-app-state';
-import { navigate } from '../../lib/actions';
 import withDismissed from '../../lib/strategies/with-dismissed';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import App from './containers/app';
+import logger from 'redux-logger'
+import App from 'containers/app/app';
+import {
+  selectTab,
+  showCalls,
+} from 'actions/navigation';
+import resolveMeta from 'router/resolve-meta'
 
-import employees from './reducers/employees';
-
-const historyMiddleware = createHistoryMiddleware();
+const historyMiddleware = createHistoryMiddleware({
+  resolveMeta,
+});
 const historyReducer = createHistoryReducer(withDismissed);
 
-const reducer = combineReducers({
-  employees,
-});
+const reducer = (combineReducers({
+  test: () => ({ a: 'b' }),
+}));
 
-const store = createStore(
+const store = global.store = createStore(
   historyReducer((state = {}) => state),
-  applyMiddleware(historyMiddleware)
+  applyMiddleware(historyMiddleware, logger)
 );
 
-store.dispatch(navigate('/'));
+store.dispatch(selectTab('calls'));
+store.dispatch(showCalls());
 
 const root = document.createElement('div');
 document.body.appendChild(root);
