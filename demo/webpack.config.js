@@ -16,6 +16,7 @@ module.exports = {
     ],
     alias: {
       'redux-app-state': path.join(__dirname, '../lib/main.js'),
+      'memory': path.join(__dirname, '../lib/apis/memory.js'),
     },
   },
   plugins: [

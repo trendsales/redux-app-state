@@ -1,1 +1,2 @@
-export default 'call list';
+import React from 'react'
+export default () => <div>callsdfs list</div>;

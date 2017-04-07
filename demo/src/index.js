@@ -5,6 +5,7 @@ import withTabs from '../../lib/strategies/with-tabs';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import memory from 'memory';
 import App from 'containers/app/app';
 import {
   selectTab,
@@ -12,22 +13,33 @@ import {
 } from 'actions/navigation';
 import resolveMeta from 'router/resolve-meta'
 import fallbacks from 'router/fallbacks';
+import faker from 'faker';
 
 console.log(withTabs);
 
+const api = memory();
+
 const historyMiddleware = createHistoryMiddleware({
+  api,
   resolveMeta,
   getFallbackPage: fallbacks,
 });
-const historyReducer = createHistoryReducer(withTabs());
+const historyReducer = createHistoryReducer(withTabs({
+  api,
+}));
+
+const contacts = Array(100).fill(null).map(() => ({
+  ...faker.helpers.createCard(),
+  avatar: faker.image.avatar(),
+}));
 
 const reducer = (combineReducers({
-  test: () => ({ a: 'b' }),
+  contacts: () => contacts,
 }));
 
 const store = global.store = createStore(
-  historyReducer((state = {}) => state),
-  applyMiddleware(historyMiddleware, logger)
+  historyReducer(reducer),
+  applyMiddleware(historyMiddleware, logger),
 );
 
 store.dispatch(selectTab('calls'));

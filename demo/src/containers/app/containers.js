@@ -5,7 +5,7 @@ import contacts from 'containers/contacts/list';
 
 export default {
   call,
-  calls,
+  calls: contacts,
   contact,
   contacts,
 };

@@ -1,1 +1,2 @@
-export default 'call details';
+import React from 'react'
+export default <div>call details</div>;

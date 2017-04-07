@@ -1,0 +1,16 @@
+.menu {
+  display: flex;
+  border-top: 3px #fff solid;
+}
+
+.item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.item.selected {
+  background: #ecf0f1;
+  color: #000;
+}
