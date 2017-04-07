@@ -7,9 +7,16 @@ describe('middleware', () => {
   let dispatch = null;
   let instance = null;
   let pop = null;
+  let getState = null;
 
   beforeEach(() => {
     dispatch = spy();
+    getState = () => ({
+      history: {
+        pages: [],
+        options: {},
+      },
+    });
     instance = middleware({
       api: {
         ...nil,
@@ -24,6 +31,7 @@ describe('middleware', () => {
       },
     })({
       dispatch,
+      getState: () => getState(),
     });
   });
 

@@ -21,10 +21,6 @@ describe('middleware', () => {
           },
           getUserAgent: () => userAgent,
         },
-        resolveMeta: ({ meta }) => {
-          dispatch(meta);
-          return meta;
-        },
       })({
         dispatch,
       });
