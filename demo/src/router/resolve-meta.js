@@ -1,5 +1,6 @@
 export default ({
   url,
+  options,
 }) => {
   const [container, query] = url.split('?');
   let params = {};
@@ -19,5 +20,6 @@ export default ({
   return {
     container,
     params,
+    tab: options.tab || 'calls',
   };
 };
