@@ -10,6 +10,9 @@ describe('middleware', () => {
 
   describe('ios 9.2 and below', () => {
     beforeEach(() => {
+      global.document = {
+        location: {},
+      };
       userAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B137 Safari/601.1';
       dispatch = spy();
       middleware({

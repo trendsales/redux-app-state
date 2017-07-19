@@ -9,6 +9,9 @@ describe('middleware', () => {
   let pop = null;
 
   beforeEach(() => {
+    global.document = {
+      location: {},
+    };
     dispatch = spy();
     instance = middleware({
       api: {
